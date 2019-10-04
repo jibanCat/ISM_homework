@@ -6,6 +6,30 @@ pdf.
 1. Draine Problem 1.1 part (a), and the following: [10 pts]
 2. Draine Problem 1.2 [5 pts]
 3. Energy and momentum input from a massive star: [10 pts]
+
+Requirements:
+----
+python 3+
+no library installation requirements, it a pure python script
+
+<Run>
+----
+>> python process_hw1.py
+
+<Output>
+----
+Prob 1.1 (a): number density of H is -> 8.98 1/cm^3
+Prob 1.1 (b): ρb / <ρb> = Nb / <Nb> = 1.62e+06
+Lower. If there's a higher concentration in the galaxy, then the structure of the galaxy will be changed by the
+structure of the dark matter, which is not the case. Baryons have more structures in the galaxtic plane than dark matter halos,
+so the concentration for baryons should be higher.
+Prob 1.2 : mean free path  = 
+	= 1 / cross-section (pi * radius^2) / number density
+	= 4.72e+13 cm
+Prob 3: 3 sources contribute to momentum and energy to ISM: 1) radiation; 2) stellar wind; 3) ejecta
+1) radiation energy = 2.84e+53 erg; radiation momentum = 9.46e+42 g cm /s
+2) stellar wind energy = 7.5e+51 erg; stellar wind momentum = 3e+43 g cm /s
+3) ejecta energy = 1.25e+51 erg; ejecta momentum = 5e+42 g cm / s
 '''
 
 class PhysVal:
@@ -33,7 +57,20 @@ class PhysVal:
             (self.value * other_value,
             "{} * {}".format( self.unit, other_unit )) 
         )
-    
+
+    def __rmul__(self, other):
+        if not isinstance(other, PhysVal):
+            other_value = other
+            other_unit  = '1'
+        else:
+            other_value = other.value
+            other_unit  = other.unit
+
+        return PhysVal(*
+            (self.value * other_value,
+            "{} * {}".format( self.unit, other_unit )) 
+        )
+
     def __add__(self, other):
         # assert self.unit == other.unit
         return PhysVal(*
@@ -143,3 +180,46 @@ mass_loss_rate  = PhysVal(10**-5, 'M_sun / yr')
 ejecta_mass     = PhysVal(5, 'M_sun')
 ejecta_velocity = PhysVal(5000, 'km / s')
 
+# constants
+speed_of_light = PhysVal(3 * 10**5, 'km / s')
+
+# unit converter
+cm  = 1                      # cm
+g   = 1                      # g
+s   = 1                      # s
+erg = cm**2 * g / s**2       # cm^2 g / s^2
+km  = 10**5                  # cm
+yr  = 365 * 24 * 60 * 60     # s
+
+# 1) radiation
+# energy = luminosity * lifetime
+# momentum = energy / speed of light
+radiation_energy   = luminosity * life_time
+radiation_momentum = radiation_energy / speed_of_light
+
+print("1) radiation energy = {:.3g} erg; radiation momentum = {:.3g} g cm /s".format(
+    radiation_energy.value * eval(radiation_energy.unit),
+    radiation_momentum.value * eval(radiation_momentum.unit)
+))
+
+# 2) stellar wind
+# energy   = 1 / 2 m v^2 = 1/2 mass_loss_rate * life_time * velocity_wind^2
+# momentum = mass_loss_rate * life_time * velocity_wind
+wind_energy = 0.5 * mass_loss_rate * life_time * velocity_wind * velocity_wind
+wind_momentum = mass_loss_rate * life_time * velocity_wind
+
+print("2) stellar wind energy = {:.3g} erg; stellar wind momentum = {:.3g} g cm /s".format(
+    wind_energy.value * eval(wind_energy.unit),
+    wind_momentum.value * eval(wind_momentum.unit)
+))
+
+# 3) ejecta
+# energy   = 1 / 2 ejecta_mass * ejecta_velocity**2
+# momentum = ejecta_mass * ejecta_velocity
+ejecta_energy  = 0.5 * ejecta_mass * ejecta_velocity * ejecta_velocity
+ejecta_momentum = ejecta_mass * ejecta_velocity
+
+print("3) ejecta energy = {:.3g} erg; ejecta momentum = {:.3g} g cm / s".format(
+    ejecta_energy.value * eval(ejecta_energy.unit),
+    ejecta_momentum.value * eval(ejecta_momentum.unit)
+))
