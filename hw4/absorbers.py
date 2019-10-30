@@ -138,26 +138,23 @@ plt.hlines(ion_c.Wlrest, min(NC), max(NC))
 save_figure("images/Wl_N_C_II.pdf"); plt.clf()
 
 # 1(b)
-dv_Fe_1 = 2 * np.sqrt(np.log(2)) * 10
-dv_Fe_2 = 2 * np.sqrt(np.log(2)) * 1
-dv_C    = 2 * np.sqrt(np.log(2)) * 10
-print("(dv)FeII_1 = {}; (dv)FeII_2 = {}".format(dv_Fe_1, dv_Fe_2))
-print("(dv)FeII_obs_1 = {}; (dv)FeII_obs_2 = {}".format(dv_Fe_1 * (1 + z), dv_Fe_2 * (1 + z)))
+dv_Fe_1 = 2 * np.sqrt(np.log(2)) * 1.5
+print("(dv)FeII_1 = {};".format(dv_Fe_1))
+print("(dv)FeII_obs_1 = {};".format(dv_Fe_1 * (1 + z)))
 
 # 1(d) thermal broadening
-calc_T = lambda M_mH, dv : 1/2.15 * M_mH * dv * 100
-T_Fe_1 = calc_T(56, 17)
-T_Fe_2 = calc_T(56, 1.7)
-T_C    = calc_T(12, 17)
-print("At least T for Fe II {}, {}; C II {}.".format(
-    T_Fe_1, T_Fe_2, T_C
+calc_T = lambda M_mH, dv : 1/2.15**2 * M_mH * dv**2 * 100
+T_Fe_1 = calc_T(56, 2.5)
+print("At least T for Fe II {}.".format(
+    T_Fe_1
 ))
 
 # 1(e)
-all_b = np.array([5, 10, 15, 20, 25]) * 10**5
-do_loglog_plot_Wlambda(ion_c, NC, all_b)
-plt.hlines(ion_c.Wlrest, min(NC), max(NC))
-save_figure("images/Wl_N_C_II_more_b.pdf"); plt.clf()
+Mfe = 56
+MC  = 12
+b_fe = 2.5
+b_C = np.sqrt(Mfe / MC) * b_fe
+print("b for CII by thermal: {}".format(b_C))
 
 do_loglog_plot_Wlambda(ion_fe_1, NFe, all_b)
 plt.hlines(ion_fe_1.Wlrest, min(NFe), max(NFe))

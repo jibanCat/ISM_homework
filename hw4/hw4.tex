@@ -142,31 +142,33 @@ Here are examples of $\EWrest$ C.O.G:
     \centering
     \includegraphics[width=0.75\columnwidth]{images/Wl_N_Fe_II_1.pdf}
     \caption{Fe II, $\lambdarest = 2382.7642$ \AA}
+    \label{fig:Fe_II_2382}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\columnwidth]{images/Wl_N_Fe_II_2.pdf}
     \caption{Fe II, $\lambdarest = 2249.8768$ \AA}
+    \label{fig:Fe_II_2249}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\columnwidth]{images/Wl_N_C_II.pdf}
     \caption{C II, $\lambdarest = 1134.5323$ \AA}
+    \label{fig:CII}
 \end{figure}
 
 The black lines I plotted there are the observed $\EWrest$ of these lines.
+Previously (in the previous version), I set a wrong $c=10^{11} cm/s$, which should be corrected as $c = 10^{10} cm/s$.
+Here the black lines are nicely crossing the COG.
 
 \section*{1 (b): Fe II Metallicity}
 The question asks us to identify the value of b parameters based on the plots we plotted in the question (a).
 We probably could solve it analytically, but I think the question asked us to find the value by eyes.
 
-Based on the information given by the question, we have beliefs that $b \in \{ 1, 2, 3, 5, 10\}$ and the column density $\log\columndensity \sim \uniform(12, 16)$.
-The trick I think is that our belief only fits to $(b=10\kms, \log{N_\ell} = 16)$ this case.
-I am not saying the values are $(b=10\kms, \log{N_\ell} = 16)$, but I am saying if we completely believe our beliefs then the values should like that.
-
-The other Fe II line (the one with $\lambdarest = 2249.8768$ \AA) should have the same $\columndensity = 10^{16}$.
-After all they are from the same element.
-We thus, by the method of fitting by our eyes, find that $b \simeq 1 \kms $ for the other Fe II line.
+Based on the curves, we see only Fig~\ref{fig:Fe_II_2249} has a stable solution for $N_\ell$, which gives $N_\ell \simeq 10^{13.6} cm^{-2}$.
+This column density could be used to solve the $b$ for FeII with $2382.7642$ \AA.
+The argument is both FeII lines should have the same $N_\ell$.
+By squinting Fig~\ref{fig:Fe_II_2382}, we roughly get $b\sim1.5\kms$.
 
 Now it's the matter of converting $b$ to $\dvfwhm$.
 With the help from Draine:
@@ -174,25 +176,18 @@ With the help from Draine:
     \dvfwhm = 2 \sqrt{\ln{2}}\, b.
 \end{equation}
 You can think this is the property of a normal distribution, that the FWHM has a nice relation with the standard deviation.
-For these two lines, the first ($\lambdarest = 2382.7642$ \AA):
+For this particular line FeII $2382.7642$ \AA, :
 \begin{equation*}
-    \dvfwhm = 2 \sqrt{\ln 2} \, 10 \kms \simeq 17\kms,
-\end{equation*}
-And for the second ($\lambdarest = 2249.8768$ \AA):
-\begin{equation*}
-    \dvfwhm = 2 \sqrt{\ln 2} \, 10 \kms \simeq 1.7\kms.    
+    \dvfwhm = 2 \sqrt{\ln 2} \, 1.5 \kms \simeq 2.5\kms,
 \end{equation*}
 
 The thing is we should expect the velocity being stretched by the redshifting of the universe by a factor of $(1 + z)$:
 \begin{equation}
-    \begin{split}
-        \dvfwhm^{obs}  &= (1+z) \times 17 \simeq 50 \kms\\
-        \dvfwhm^{obs}  &= (1+z) \times 1.7 \simeq 5 \kms.
-    \end{split}
+        \dvfwhm^{obs}  = (1+z) \times 17 \simeq 7.5 \kms
 \end{equation}
 
 The thing is the resolution of HIRES is around $7-9 \kms$.
-Thus, HIRES can resolve the first FeII line but not the second one.
+So it's hard to tell wether it is resolvable or not.
 
 We now are supposed to calculate the metallicity:
 \begin{equation}
@@ -211,94 +206,89 @@ Thus,
 \begin{equation*}
     [Fe/H] = 
     \log{(N_{Fe} / N_H)} - \log{(N_{Fe} / N_H)}_\odot =
-    \log{(10^{16} / 10^{20.3})} - (-4.5) = 
-    16 - 20.3 + 4.5 = 0.2.
+    \log{(10^{13.6} / 10^{20.3})} - (-4.5) = 
+    13.6 - 20.3 + 4.5 = -2.2.
 \end{equation*}
 
 \section*{1 (c): CII Metallicity}
-The question is a little bit obscure for me, since I don't have knowledge about turbulent broadening.
-But if we believe the $b$ is broadened by the turbulent, we have high confidence that $b \geq 10 \kms$ but not too far away from $10 \kms$.
-And if we highly believe our selection is correct $b \in \{1, 2 ,3, 5, 10\}$ (surely it's not true), 
-so combine with two information we have $b \approx 10 \kms$. 
-We should note that the only thing we know is $b \geq 10 \kms$ and the turbulent will possibly induce the overestimation of $b$.
+I did not know this before I read the solution.
+But for turbulent broadening, all ions of the system have the same $b$s.
+So CII will have $b \sim 1.5\kms$, the same as FeII $2382$ \AA in the previous question.
 
-We now stop the argument of guessing $b$ and keep going on calculating the metallicity.
-Note that based on the plot we find $N_{CII} = 10^{17}$ according to our beliefs on $\log{\columndensity} \sim (13, 17)$.
+By squinting the Fig~\ref{fig:CII}, we roughly get $N_\ell \sim 10^{16.5} cm^{-2}$.
+
 Now we carry out the metallicity:
 \begin{equation*}
     \begin{split}
         [C\,II/H] &= 
         \log{(N_{CII} / N_H)} - \log{(N_{CII} / N_H)}_\odot =\\
-        &= \log{(10^{17} / 10^{20.3})} - ( 8.43 - 12 ) \approx 
-        17 - 20.3 + 3.57 = 0.27.                
+        &= \log{(10^{16.5} / 10^{20.3})} - ( 8.43 - 12 ) \approx 
+        16.5 - 20.3 + 3.57 = -0.23.                
     \end{split}
 \end{equation*}
-It seems to have a similar metallicity to the Fe\,II metallicity.
+
+Comparing to FeII,
+\begin{equation*}
+    [C\,II, Fe\,II] = \log{(N_{CII} / N_{FeII})} - \log{(N_{CII} / N_{FeII})}_{\odot}
+    = 16.5 - 13.6 - (8.43 - 7.5) = 1.97.
+\end{equation*}
+
 
 \section*{1 (d): Thermally broadening}
 We know the thermal velocity is also a Gaussian like distribution, so the FWHM could be written as:
 \begin{equation}
     \dvfwhm^{\textrm{thermal}} = 2 \sqrt{\ln 2} \left( \frac{k T}{M} \right)^{1/2} 
-    = 2.15 \left( \frac{T / 100\, \mt K}{M / m_H} \right)
+    = 2.15 \left( \frac{T / 100\, \mt K}{M / m_H} \right)^{1/2} 
     \kms,
+    \label{eq:thermal}
 \end{equation}
-where we know $M_{Fe} / m_H \simeq 56$, and $M_{C} / m_H \simeq 12$.
-
+where we know $M_{Fe} / m_H \simeq 56$.
 We would thus be able to infer the value of T if we assume thermal velocity contribute to the $b$ we observe from the plots.
 
-The least condition for these lines being dominated by thermal broadening is that the $\dvfwhm^{\textrm{thermal}} > \dvfwhm^{obs}$.
+The least condition for these lines being dominated by thermal broadening is that the $\dvfwhm^{\textrm{thermal}} > \dvfwhm$.
 \begin{equation*}
     \begin{split}
-        &\dvfwhm^{\textrm{thermal}} > \dvfwhm^{obs}\\
+        &\dvfwhm^{\textrm{thermal}} > \dvfwhm\\
         &\Rightarrow
-        2.15 \left( \frac{T / 100\, \mt K}{M / m_H} \right)
-    \kms >  \dvfwhm^{obs}\\
+        2.15 \left( \frac{T / 100\, \mt K}{M / m_H} \right)^{1/2} 
+    \kms >  \dvfwhm\\
         &\Rightarrow
-        T / 100\, {\mt K} > 1/2.15 * \frac{M}{m_H} \dvfwhm^{obs}
+        T / 100\, {\mt K} > 1/(2.15)^2 * \frac{M}{m_H} \dvfwhm^2\\
+        &\Rightarrow 
+        T > 100/2.15^2 * 56 * 2.5^2 K \simeq 7571.7\,K
     \end{split}
 \end{equation*}
 
-Those conditions are:
-\begin{itemize}
-    \item Fe\,II (2382.7642 \AA): at least 44279\,K
-    \item Fe\,II (2249.8768 \AA): at least 4428\,K
-    \item C\,II : at least 9488\,K.
-\end{itemize}
-The temperature for the first one is too high for me to believe.
-There're probably something wrong with my beliefs but I am not sure which part went wrong.
-For the other two, they are probably going through a plasma stage.
 
 \section*{1(e) Infer b for thermal broadening}
-I feel the question is a little bit tricky since it asks us to `infer' the $b$ value and $\columndensity$ instead of asking us to calculate them.
-My guess is since it is still in the Doppler broadening region, let's plot more b values:
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\columnwidth]{images/Wl_N_C_II_more_b.pdf}
-\end{figure}
-If $b = 25 \kms$, it is still in the Doppler broadening region but the curve reach the measured $\EWrest$ line.
+Since we have Eq~\ref{eq:thermal}, we thus know $\dvfwhm^{\textrm{thermal}} \propto \frac{1}{\sqrt{M_X}}$, where $X \in \{\textrm{ions}\}$.
+By the linear relationship between $\dvfwhm^{\textrm{thermal}}$ and $b$, we have:
+\begin{equation*}
+    b \propto \frac{1}{\sqrt{M_X}},
+\end{equation*}
+where $X \in \{\textrm{ions}\}$.
+Thus $b$ for CII is estimated by $\sqrt{\frac{M_{FeII}}{M_{CII}}} b_{FeII} = 5.4 \kms$.
+The corresponding $N_\ell$ would be $N_\ell = 10^{12.3} cm^{-2}$ by squinting.
 
-The value of metallicity would be the same since the column density seems to be unchanged:
+The value of metallicity would be:
 \begin{equation*}
     \begin{split}
         [C\,II/H] &= 
         \log{(N_{CII} / N_H)} - \log{(N_{CII} / N_H)}_\odot =\\
-        &= \log{(10^{17} / 10^{20.3})} - ( 8.43 - 12 ) \approx 
-        17 - 20.3 + 3.57 = 0.27.                
+        &= \log{(10^{12.3} / 10^{20.3})} - ( 8.43 - 12 ) \approx 
+        12.3 - 20.3 + 3.57 = -4.43.                
     \end{split}
 \end{equation*}
 
-I guess the idea is if it is all due to Doppler broadening, then the $\EWrest$ measure should fall into the flat regime of the C.O.G.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\columnwidth]{images/Wl_N_Fe_II_1_more_b.pdf}
-\end{figure}
-So if $b = 25 \kms$, we probably have a lower $\columndensity$ in Fe.
-So the abundance of carbon comparing to Fe will increase.
+Comparing to iron:
+\begin{equation*}
+    [C\,II, Fe\,II] = \log{(N_{CII} / N_{FeII})} - \log{(N_{CII} / N_{FeII})}_{\odot}
+    = 12.3 - 13.6 - (8.43 - 7.5) = -2.29.
+\end{equation*}
+
 
 \section*{1 (f): Carbon enhanced}
-Given that carbon rich DLA is rare, it's probably not possible that the lines are due to Doppler broadening.
-The way to decrease the column density of carbon is to increase the $b$, in that way it is in the optically thin regime.
-Usually it is hard to resolve the lines in optically thin regime though we have a relatively larger $b$ here for carbon.
-But if we know the combination of the elements in the medium, we could try to use other lines in Doppler or damping regimes so that would be easier to resolve.
+Given that carbon rich DLA is rare, it's more possible that thermal broadening is the dominated effect since it gives lower carbon abundance.
+
 
 \end{document}
