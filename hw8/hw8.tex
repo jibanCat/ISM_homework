@@ -1,0 +1,180 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+% \usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+% \usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\usepackage{float}
+
+% define vector
+\newcommand{\q}{\underline}
+\newcommand{\mt}{\mathrm}
+
+\setlength{\parindent}{0.2in}
+\setlength{\parskip}{0.1in}
+
+% Edit these as appropriate
+\newcommand\course{Phys 213}
+\newcommand\hwnumber{1}                  % <-- homework number
+\newcommand\NetIDa{M.-F. Ho}           % <-- NetID of person #1
+% \newcommand\NetIDb{netid12038}           % <-- NetID of person #2 (Comment this line out for problem sets)
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+% \lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Homework 7}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\newcommand{\Data}{\mathcal{D}}
+\newcommand{\xvec}{\boldsymbol{x}}
+\newcommand{\Xvec}{\boldsymbol{X}}
+\newcommand{\Var}{\textrm{Var}}
+\newcommand{\normal}{\textrm{N}}
+\newcommand{\xmean}{\langle \xvec \rangle}
+\newcommand{\newx}{\tilde{x}}
+\newcommand{\integer}{\mathbb{N}}
+\newcommand{\thetarv}{\tilde{\theta}}
+\newcommand{\phirv}{\tilde{\phi}}
+
+\newcommand{\ml}{m_{\ell}}
+\newcommand{\specterms}{^{2S+1}\mathcal{L}^p_\mathcal{J}}
+
+\newcommand{\hi}{\textrm{H\,I}}
+\newcommand{\cm}{\textrm{\,cm}}
+\newcommand{\cms}{\textrm{\,cm/s}}
+\newcommand{\kms}{\textrm{\,km/s}}
+\newcommand{\cmcm}{\textrm{\,cm}^{-2}}
+% \newcommand{\hz}{\textrm{\,s}^{-1}}
+
+\newcommand{\civ}{\textrm{C\,IV}}
+\newcommand{\mgii}{\textrm{Mg\,II}}
+\newcommand{\caii}{\textrm{Ca\,II}}
+\newcommand{\siii}{\textrm{Si\,II}}
+
+\newcommand{\Isky}{I_\nu^{\textrm{sky}}}
+\newcommand{\Iradio}{I_\nu^{\textrm{radio}}}
+\newcommand{\indicator}{\mathbb{I}}
+\newcommand{\Snuradio}{S_\nu^{\textrm{radio}}}
+
+\newcommand{\sradius}{R_{\textrm{S0}}}
+\newcommand{\hdensity}{n(\textrm{H}^{+})}
+\newcommand{\second}{\textrm{s}}
+
+\newcommand{\Stroradius}{Str\"omgren radius}
+\newcommand{\erg}{\textrm{erg}}
+\newcommand{\sr}{\textrm{sr}}
+\newcommand{\hz}{\textrm{Hz}}
+\newcommand{\nhi}{N_{\textrm{HI}}}
+
+\newcommand{\mean}{\mathbb{E}}
+
+
+
+\begin{document}
+
+\section*{18.2: line ratio}
+
+\subsection*{(a): T and n}
+I think the question is asking us to draw a horizontal line on Fig 18.2, which means, for O\,III, 
+\begin{itemize}
+    \item $ T\sim 10^4 \, K $ if $ n = 10^6 \, \cm^{-3} $
+    \item $ T\sim 1.6 * 10^4 \, K $ if $ n = 10^5 \, \cm^{-3} $
+    \item $ T\sim 1.8 * 10^4 \, K $ if $ n = 10^4 \, \cm^{-3} $
+    \item $ T\sim 2 * 10^4 \, K $ if $ n = 10^3 \, \cm^{-3} $
+\end{itemize}
+
+For O\,II, based on Fig 18.4, 
+\begin{equation}
+    n_e T_4^{-1/2} \simeq 2 * 10^2 \,\cm^{-3}.
+\end{equation}
+
+So it seems $ T\sim 2 * 10^4 \, K $ if $ n = 10^3 \, \cm^{-3} $ makes more sense.
+
+\subsection*{(b): reddening}
+
+The reddenning is $ A(4364.4) \textrm{\AA} - A(5008.2\textrm{\AA}) = 0.31 \, \textrm{mag} $.
+The line ratio contribution from dust is $10^{0.31} = 2.04$.
+The new line ratio for O\,III is:
+\begin{equation}
+    \frac{I([OIII]4364.4)}{I([OIII] 5008.2 )}
+    = 0.003 / 2.04 = 0.0015.
+\end{equation}
+
+For Fig 18.2, we have:
+\begin{itemize}
+    \item $ T\sim 8 * 10^3 \, K $ if $ n = 10^6 \, \cm^{-3} $
+    \item $ T\sim 1.1 * 10^4 \, K $ if $ n = 10^5 \, \cm^{-3} $
+    \item $ T\sim 1.3 * 10^4 \, K $ if $ n = 10^4 \, \cm^{-3} $
+    \item $ T\sim 1.4 * 10^4 \, K $ if $ n = 10^3 \, \cm^{-3} $
+\end{itemize}
+
+So we only have upper limits:
+$ n_e < 10^3 \,\cm^{-3}$; and $ T > 1.4*10^4 \, K $.
+
+\section*{Heating and Cooling}
+
+Given:
+\begin{itemize}
+    \item $T = 32\,000\,K$.
+\end{itemize}
+
+\subsection*{(a): center, balance photo/cooling}
+
+Since it is in the center, we should choose $\langle\psi\rangle$ since almost all photons will produce photoionizations.
+
+Heating rate:
+\begin{equation}
+    \Gamma(H \rightarrow H^+)
+    \simeq \alpha_B n_H n_e \psi k T_c
+\end{equation}
+
+Cooling rate:
+\begin{equation}
+    \Lambda_{rr} = \alpha_B n_e n(H^+) \langle E_{rr} \rangle
+\end{equation}
+
+Known:
+\begin{equation}
+    \begin{split}
+        T_c &= 32\,000 \, K\\
+        \langle \psi \rangle &= 1.380
+    \end{split}
+\end{equation}
+
+Assume $n(H^+) \simeq n(H)$.
+Equate (3) and (4):
+\begin{equation*}
+    \langle E_{rr} \rangle = \psi k T_c = 1.380 \times k \times 32\,000
+\end{equation*}
+
+From (27.21), we have a suspicious expressions for kinetic energy:
+\begin{equation}
+    \langle E_{rr} \rangle
+    = (2 + \gamma) k T,
+\end{equation}
+where $\gamma$ depends on case A and case B and roughly to be negative unity (technically $\sim$ 0.7), so $ \langle E_{rr} \rangle \sim kT$.
+
+Thus, 
+\begin{equation*}
+    T \sim 1.38 \times 32000 = 44\,160.    
+\end{equation*}
+
+\subsection*{(b): mass-weighted average temperature}
+So we should take into account the cross-section at this time.
+Since there would only have hydrogen, we could imagine mass is proportional to number of particles, and number of particles linearly related to cross-section.
+
+The choice of $\psi$ will switch to $\psi_0 = 0.864$, which means (based on the same calculations in (a)) $T \sim 0.86 / 0.7 \times 32000 \sim 32000 $.
+
+\end{document}
